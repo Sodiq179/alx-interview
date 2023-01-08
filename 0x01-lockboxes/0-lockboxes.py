@@ -1,30 +1,31 @@
 #!/usr/bin/python3
-
-"""
-Problem: You have n number of locked boxes in front of you.
-         Each box is numbered sequentially from 0 to n - 1
-         and each box may contain keys to the other boxes.
-Task: Write a method that determines if all the boxes can be opened.
-"""
+""" Module that checks locked boxes """
 
 
 def canUnlockAll(boxes):
-    """
-    Function that checks with boolean value if the list type and
-    length to invoke two for iterations one to traverse the list
-    and the other to compaer if key is idx or not in order to open
-    """
-    if type(boxes) is not list:
+    """ Method that determines if all boxes can be opened """
+
+    if boxes == 0:
         return False
-    elif (len(boxes)) == 0:
+
+    if not isinstance(boxes, list):
         return False
-    for k in range(1, len(boxes) - 1):
-        boxes_checked = False
-        for idx in range(len(boxes)):
-            boxes_checked = k in boxes[idx] and k != idx
-            if boxes_checked:
-                break
-        if boxes_checked is False:
-            return boxes_checked
-    return True
-    
+
+    if len(boxes) == 0:
+        return False
+
+    check = [0]
+    list_ing = [i for i in range(len(boxes))]
+
+    for in_check in check:
+        for in_boxes in boxes[in_check]:
+            if in_boxes not in check and in_boxes in list_ing:
+                if in_boxes >= len(boxes):
+                    return False
+                check.append(in_boxes)
+
+    if len(check) == len(boxes):
+        return True
+    else:
+        return False
+        
